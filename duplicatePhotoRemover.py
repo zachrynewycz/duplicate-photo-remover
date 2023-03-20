@@ -7,7 +7,7 @@ IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.svg', '.heic', '.heif']
 def delete_duplicates(path, check_subfolders=False):
     for dirpath, dirnames, filenames in os.walk(path):
         for filename in filenames:
-            if any(filename.lower().endswith(extension) for extension in IMAGE_EXTENSIONS) and re.search(r"\(\d+\)", filename):
+            if any(filename.lower().endswith(extension) for extension in IMAGE_EXTENSIONS) and re.search(r"\(\d+\)", filename) or "- Copy" in filename:
                 os.remove(os.path.join(dirpath, filename))
                 print(f"Deleted {os.path.join(dirpath, filename)}")
         if not check_subfolders:
